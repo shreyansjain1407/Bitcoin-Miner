@@ -10,5 +10,5 @@ let inputStr (len : int) : string =
     let prefix = "notmarcus"
     prefix + (randomStr len) 
 
-let e = inputStr 5
-printf "%s" e
+//let e = inputStr 5
+//printf "%s" e
