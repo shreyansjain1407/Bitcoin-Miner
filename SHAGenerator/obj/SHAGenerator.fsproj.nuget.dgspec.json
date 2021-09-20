@@ -41,7 +41,8 @@
             },
             "Akka.Remote": {
               "target": "Package",
-              "version": "[1.4.25, )"
+              "version": "[1.4.25, )",
+              "generatePathProperty": true
             },
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",

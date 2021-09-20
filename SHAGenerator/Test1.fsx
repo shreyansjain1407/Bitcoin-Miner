@@ -20,6 +20,11 @@ let hash' = sb.ToString() |> str_byt |> (new SHA256Managed()).ComputeHash |> Seq
 let intToChar c = 
     char c
 
-printfn "%c" intToChar 48
-for i = 1 to 10 do
-    printfn "%i" i
+printfn "%c" (intToChar 48)
+let sb' = System.Text.StringBuilder("ShreyansJain")
+for i = 32 to 126 do
+    sb'.Append(intToChar i)
+    printfn "\n %s \n" (sb'.ToString())
+    sb'.ToString() |> str_byt |> (new SHA256Managed()).ComputeHash |> Seq.iter (printf "%x")
+    sb'.Length <- sb'.Length - 1;
+    
