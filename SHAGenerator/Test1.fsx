@@ -1,6 +1,7 @@
 open System.IO
 open System.Security.Cryptography
 open System.Text
+open System.Text.RegularExpressions
 
 for arg in fsi.CommandLineArgs |> Seq.skip 1 do
     printf "Calculating sha256 of %s\n  " arg
@@ -40,16 +41,31 @@ let stringToHash (_str : string) : string =
     System.Security.Cryptography.SHA256.Create().ComputeHash(System.Text.Encoding.ASCII.GetBytes _str) |> bytesToHex
  
 
+//Function for regex matching
+//http://www.fssnip.net/29/title/Regular-expression-active-pattern
+let (|Regex|_|) pattern input =
+    let m = Regex.Match(input, pattern)
+    if m.Success then Some(List.tail [ for g in m.Groups -> g.Value ])
+    else None
+
+
+
 let sb_final = System.Text.StringBuilder("shreyansjain")
-let find_Hash (hash_Sb : StringBuilder) (level : int) =
-    if level = 5 then
+let rec find_Hash (hash_Sb : StringBuilder) (level : int) =
+    if level = 4 then
         let cur_hash = stringToHash (hash_Sb.ToString())
-        
+        printfn "%s \t %s" (sb_final.ToString()) cur_hash
         0
     else
         for i = 32 to 126 do
             hash_Sb.Append(intToChar i)
             find_Hash hash_Sb (level + 1)
             hash_Sb.Length <- sb'.Length - 1;
-        
         0
+        
+        
+let phone = "(555) 555-5555"
+match phone with
+| Regex @"\(([0-9]{3})\)[-. ]?([0-9]{3})[-. ]?([0-9]{4})" [ area; prefix; suffix ] ->
+    printfn "Area: %s, Prefix: %s, Suffix: %s" area prefix suffix
+| _ -> printfn "Not a phone number"
