@@ -8,61 +8,54 @@ open Akka.FSharp
 open Akka.Configuration
 open Sha256
 open RandomString
-(*
+
 let system = System.create "system" <| Configuration.load()
 
-type ProcessorMessage = ProcessJob of int * int
+type MinerMessage = MineJob of int * int
+type BossMessage = BossJob of bool * string * string
 
-let processor (mailbox : Actor <_>) =
+let Miner (mailbox : Actor <_>) =
     let rec loop() = actor {
-        let! ProcessJob(numZero, strLen) = mailbox.Receive()
-        // Handle message here
-        //printfn "Processor: Received ProcessJob %i %i %i" x y z
-        let mutable notFound = true
-        while notFound do 
-            let e = inputStr strLen
-            printf "%s\n" e
-            let d = stringToHash e
-            printf "%s\n" d
-            if(leadCheck (d, numZero)) then 
-                printf "found: %s : %s\n" e d
-                notFound <- false
+        let! MineJob(numZero, strLen) = mailbox.Receive()
+        let boss = mailbox.Sender()
+
+        let e = inputStr strLen
+        printf "%s\n" e
+        let d = stringToHash e
+        printf "%s\n" d
+        let found = leadCheck (d, numZero)
+        if(found) then 
+            printf "found: %s : %s\n" e d
+            boss <! BossJob(found, e, d)       
         return! loop()
     }
     loop()
 
-let processorRef = spawn system "processor" processor
+let processorRef = spawn system "miner" Miner
 
-processorRef <! ProcessJob(1,5)
-*)
-let mutable notFound = true
-while notFound do 
-    let e = inputStr 5
-    printf "%s\n" e
-    let d = stringToHash e
-    printf "%s\n" d
-    if(leadCheck (d, 2)) then 
-        printf "found: %s : %s\n" e d
-        notFound <- false
-(*
-let strategy =
-    Strategy.OneForOne (fun e ->
-    match e with
-    | :? ArithmeticException -> Directive.Resume
-    | :? ArgumentException -> Directive.Stop
-    | _ -> Directive.Escalate)
+processorRef <! MineJob(1,5)
 
-let boss =
-    spawnOpt system "master" (fun mailbox ->
-        let worker = spawn mailbox "worker" workerFun
-        
-        let rec loop() =
-            actor {
-                let! msg = mailbox.Receive()
-                match msg with
-                | Responnd -> worker.Tell(msg, mailbox.Sender())
-                | _ -> worker <! msg
-                return! loop()
-            }
-        loop()) [SupervisorStrategy(strategy)]
-        *)
+let Boss (mailbox : Actor <_>) = 
+    let numProcess = System.Environment.ProcessorCount |> int64
+    let numMiners = numProcess*250L
+    let miners = 
+        [1L..numMiners]
+        |> List.map(fun id -> spawn system (sprintf "local_%d" id) Miner)
+    let minerEnum = [| for m in miners -> m |]
+    
+    let mutable finished = 0L
+    let split = numMiners * 2L
+
+    let rec loop() = actor {
+        let! BossJob(found, input, hash) = mailbox.Receive()
+        let miner = mailbox.Sender()
+        miner <! MineJob(1,5)
+        if (found) then
+            printf "found: %s : %s\n" input, hash 
+            mailbox.Context.System.Terminate() |> ignore
+        return! loop()
+    } loop()
+
+let bossRef = spawn system "boss" Boss
+
+system.WhenTerminated.Wait()
