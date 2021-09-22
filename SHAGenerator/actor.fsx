@@ -14,6 +14,10 @@ let system = System.create "system" <| Configuration.load()
 type MinerMessage = MineJob of int * int
 type BossMessage = BossJob of bool * string * string
 
+let scriptArg = fsi.CommandLineArgs
+let numLead = scriptArg.[1] |> int
+//printf "Arg: %s\n" scriptArg.[1]
+
 let Miner (mailbox : Actor <_>) =
     let rec loop() = actor {
         let! MineJob(numZero, strLen) = mailbox.Receive()
@@ -40,8 +44,9 @@ let Boss (mailbox : Actor <_>) =
     let numMiners = numProcess*250
     let minerArray = Array.create numMiners (spawn system "miner" Miner)
 
+    let rand = new Random()
     for i in minerArray do
-               i <! MineJob(1,5)
+               i <! MineJob(numLead,rand.Next(100))
     let rec loop() = actor {
         let! BossJob(found, input, hash) = mailbox.Receive()
        
