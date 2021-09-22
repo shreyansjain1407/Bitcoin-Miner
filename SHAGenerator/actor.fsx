@@ -1,4 +1,4 @@
-﻿//#time "on"
+﻿#time "on"
 #r "nuget: Akka.FSharp" //load with nuget
 #load "sha256.fsx"
 #load "RandomString.fsx"
@@ -18,38 +18,37 @@ let Miner (mailbox : Actor <_>) =
     let rec loop() = actor {
         let! MineJob(numZero, strLen) = mailbox.Receive()
         let boss = mailbox.Sender()
-
+        let numZero = 1
+        let strLen = 5
         let e = inputStr strLen
-        printf "%s\n" e
+        //printf "%s  " e
         let d = stringToHash e
-        printf "%s\n" d
+        //printf "%s\n" d
         let found = leadCheck (d, numZero)
         if(found) then 
             printf "found: %s : %s\n" e d
-            boss <! BossJob(found, e, d)       
+    
+        boss <! BossJob(found, e, d)
         return! loop()
     }
     loop()
 
-let processorRef = spawn system "miner" Miner
+//let processorRef = spawn system "miner" Miner
 
-processorRef <! MineJob(1,5)
+//processorRef <! MineJob(1,5)
 
 let Boss (mailbox : Actor <_>) = 
-    let numProcess = System.Environment.ProcessorCount |> int64
-    let numMiners = numProcess*250L
-    let miners = 
-        [1L..numMiners]
-        |> List.map(fun id -> spawn system (sprintf "local_%d" id) Miner)
-    let minerEnum = [| for m in miners -> m |]
-    
-    let mutable finished = 0L
-    let split = numMiners * 2L
+    let numProcess = System.Environment.ProcessorCount |> int
+    let numMiners = numProcess*250
+    let minerArray = Array.create numMiners (spawn system "miner" Miner)
 
+    for i in minerArray do
+               i <! MineJob(1,5)
     let rec loop() = actor {
         let! BossJob(found, input, hash) = mailbox.Receive()
         let miner = mailbox.Sender()
-        miner <! MineJob(1,5)
+       
+        //workerSystem <! MineJob(1,5)
         if (found) then
             printf "found: %s : %s\n" input, hash 
             mailbox.Context.System.Terminate() |> ignore
@@ -58,4 +57,4 @@ let Boss (mailbox : Actor <_>) =
 
 let bossRef = spawn system "boss" Boss
 
-system.WhenTerminated.Wait()
+//system.WhenTerminated.Wait()
