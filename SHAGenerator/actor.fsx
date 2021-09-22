@@ -16,7 +16,7 @@ type BossMessage = BossJob of bool * string * string
 
 let scriptArg = fsi.CommandLineArgs
 let numLead = scriptArg.[1] |> int
-//printf "Arg: %s\n" scriptArg.[1]
+printf "Arg: %s\n" scriptArg.[1]
 
 let Miner (mailbox : Actor <_>) =
     let rec loop() = actor {
