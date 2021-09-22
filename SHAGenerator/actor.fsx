@@ -18,16 +18,14 @@ let Miner (mailbox : Actor <_>) =
     let rec loop() = actor {
         let! MineJob(numZero, strLen) = mailbox.Receive()
         let boss = mailbox.Sender()
-        let numZero = 1
-        let strLen = 5
         let e = inputStr strLen
         //printf "%s  " e
         let d = stringToHash e
         //printf "%s\n" d
         let found = leadCheck (d, numZero)
         if(found) then 
-            printf "found: %s : %s\n" e d
-    
+            //printf "Found Miner: %s : %s\n" e d
+            boss <! BossJob(found, e, d)
         boss <! BossJob(found, e, d)
         return! loop()
     }
@@ -46,15 +44,13 @@ let Boss (mailbox : Actor <_>) =
                i <! MineJob(1,5)
     let rec loop() = actor {
         let! BossJob(found, input, hash) = mailbox.Receive()
-        let miner = mailbox.Sender()
        
-        //workerSystem <! MineJob(1,5)
         if (found) then
-            printf "found: %s : %s\n" input, hash 
+            printf "Found Boss: %s : %s\n" input hash 
             mailbox.Context.System.Terminate() |> ignore
         return! loop()
     } loop()
 
 let bossRef = spawn system "boss" Boss
 
-//system.WhenTerminated.Wait()
+system.WhenTerminated.Wait()
