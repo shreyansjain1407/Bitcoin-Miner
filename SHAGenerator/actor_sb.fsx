@@ -29,7 +29,7 @@ let iniString (inp: int) =
     elif inp = 4 then "0000"
     else ""
 
-let check = iniString numZero
+let check = iniString numLead
 
 let leadCheck (str: string, numZero: int) = 
     if str.StartsWith(check) then

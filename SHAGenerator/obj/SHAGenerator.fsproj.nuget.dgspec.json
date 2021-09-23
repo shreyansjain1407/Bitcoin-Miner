@@ -41,6 +41,11 @@
               "version": "[1.4.25, )",
               "generatePathProperty": true
             },
+            "Akka.FSharp": {
+              "target": "Package",
+              "version": "[1.4.25, )",
+              "generatePathProperty": true
+            },
             "Akka.Remote": {
               "target": "Package",
               "version": "[1.4.25, )",

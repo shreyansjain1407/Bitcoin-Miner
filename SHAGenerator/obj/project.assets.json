@@ -17,6 +17,21 @@
           "lib/netstandard2.0/Akka.dll": {}
         }
       },
+      "Akka.FSharp/1.4.25": {
+        "type": "package",
+        "dependencies": {
+          "Akka": "1.4.25",
+          "FSharp.Core": "5.0.0",
+          "FSharp.Quotations.Evaluator": "2.1.0",
+          "FsPickler": "5.3.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Akka.FSharp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Akka.FSharp.dll": {}
+        }
+      },
       "Akka.Remote/1.4.25": {
         "type": "package",
         "dependencies": {
@@ -174,6 +189,31 @@
             "codeLanguage": "any",
             "copyToOutput": false
           }
+        }
+      },
+      "FSharp.Quotations.Evaluator/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.3.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/FSharp.Quotations.Evaluator.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FSharp.Quotations.Evaluator.dll": {}
+        }
+      },
+      "FsPickler/5.3.2": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.3.2",
+          "System.Reflection.Emit.Lightweight": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/FsPickler.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FsPickler.dll": {}
         }
       },
       "Google.Protobuf/3.17.3": {
@@ -1143,7 +1183,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/_._": {}
+          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.ILGeneration.dll": {}
@@ -1158,7 +1198,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/_._": {}
+          "ref/netstandard1.0/System.Reflection.Emit.Lightweight.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.Lightweight.dll": {}
@@ -1860,6 +1900,19 @@
         "lib/netstandard2.0/Akka.xml"
       ]
     },
+    "Akka.FSharp/1.4.25": {
+      "sha512": "SggTmYJnGWTSHPAVROALUfXMbx7jWrL+IsVcfRjE4FnpLUroe6xLvV58dTjUc0pad6vrTar5OJhPlH0HSemn0A==",
+      "type": "package",
+      "path": "akka.fsharp/1.4.25",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "akka.fsharp.1.4.25.nupkg.sha512",
+        "akka.fsharp.nuspec",
+        "lib/netstandard2.0/Akka.FSharp.dll",
+        "lib/netstandard2.0/Akka.FSharp.xml"
+      ]
+    },
     "Akka.Remote/1.4.25": {
       "sha512": "g9R9fbmd4/GabVwOFS7Cer+Wt7Yjobesc/O2qcyIl0kj9/R0Kp2MRn1G3iECVD3POR42J7ROVSeh+xYMwRwtrA==",
       "type": "package",
@@ -1990,6 +2043,38 @@
         "lib/netstandard2.1/tr/FSharp.Core.resources.dll",
         "lib/netstandard2.1/zh-Hans/FSharp.Core.resources.dll",
         "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll"
+      ]
+    },
+    "FSharp.Quotations.Evaluator/2.1.0": {
+      "sha512": "UwmbcIw78pNI4h29H6Vk+45Xky7yqzpxOkHIciW/0VhCN95ANVaopD2wajn88hjabgelm7QmPrC41CKFDhHKIA==",
+      "type": "package",
+      "path": "fsharp.quotations.evaluator/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fsharp.quotations.evaluator.2.1.0.nupkg.sha512",
+        "fsharp.quotations.evaluator.nuspec",
+        "lib/netstandard2.0/FSharp.Quotations.Evaluator.dll",
+        "lib/netstandard2.0/FSharp.Quotations.Evaluator.pdb",
+        "lib/netstandard2.0/FSharp.Quotations.Evaluator.xml",
+        "logo.png"
+      ]
+    },
+    "FsPickler/5.3.2": {
+      "sha512": "LFtxXpQNor8az1ez3rN9oz2cqf/06i9yTrPyJ9R83qLEpFAU7Of0WL2hoSXzLHer4lh+6mO1NV4VQFiBzNRtjw==",
+      "type": "package",
+      "path": "fspickler/5.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fspickler.5.3.2.nupkg.sha512",
+        "fspickler.nuspec",
+        "lib/net45/FsPickler.dll",
+        "lib/net45/FsPickler.pdb",
+        "lib/net45/FsPickler.xml",
+        "lib/netstandard2.0/FsPickler.dll",
+        "lib/netstandard2.0/FsPickler.pdb",
+        "lib/netstandard2.0/FsPickler.xml"
       ]
     },
     "Google.Protobuf/3.17.3": {
@@ -6282,6 +6367,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "Akka >= 1.4.25",
+      "Akka.FSharp >= 1.4.25",
       "Akka.Remote >= 1.4.25",
       "FSharp.Core >= 6.0.0-beta.*"
     ]
@@ -6322,6 +6408,11 @@
         "targetAlias": "net5.0",
         "dependencies": {
           "Akka": {
+            "target": "Package",
+            "version": "[1.4.25, )",
+            "generatePathProperty": true
+          },
+          "Akka.FSharp": {
             "target": "Package",
             "version": "[1.4.25, )",
             "generatePathProperty": true
