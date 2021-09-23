@@ -6342,7 +6342,6 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Akka >= 1.4.25",
       "Akka.FSharp >= 1.4.25",
       "Akka.Remote >= 1.4.25",
       "FSharp.Core >= 5.0.0"
@@ -6354,11 +6353,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj",
-      "projectName": "SHAGenerator",
-      "projectPath": "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj",
+      "projectUniqueName": "F:\\Sem 4\\DOS-Projects\\Remote_Actor\\Remote_Actor.fsproj",
+      "projectName": "Remote_Actor",
+      "projectPath": "F:\\Sem 4\\DOS-Projects\\Remote_Actor\\Remote_Actor.fsproj",
       "packagesPath": "C:\\Users\\shrey\\.nuget\\packages\\",
-      "outputPath": "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\obj\\",
+      "outputPath": "F:\\Sem 4\\DOS-Projects\\Remote_Actor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\shrey\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6382,11 +6381,6 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
-          "Akka": {
-            "target": "Package",
-            "version": "[1.4.25, )",
-            "generatePathProperty": true
-          },
           "Akka.FSharp": {
             "target": "Package",
             "version": "[1.4.25, )",

@@ -18,26 +18,11 @@ let getLead(str : string, numZero : int) : string =
     let lead = str.[0..numZero]
     lead
 
-
-    
-//let (|Prefix|_|) (p:string) (s:string) =
-//    if s.StartsWith(p) then
-//        Some(s.Substring(p.Length))
-//    else
-//        None
-
-
-//    match str with
-//    | Prefix check str -> true
-//    | _ -> false
-
-
-// let leadCheck(str : string, numZero : int) : bool =
-//     let str = 
-//     let zeroArray = [| for i in 1 .. numZero -> 0 |]
-//     let leadZero = System.String.Join("", zeroArray)
-//     let leadStr = str.[0..(numZero-1)]
-//     leadStr.Equals(leadZero)
+let leadCheck(str : string, numZero : int) : bool =
+    let zeroArray = [| for i in 1 .. numZero -> 0 |]
+    let leadZero = System.String.Join("", zeroArray)
+    let leadStr = str.[0..(numZero-1)]
+    leadStr.Equals(leadZero)
 
 //let _str = "10d444d"
 //printf "%b" (leadCheck (_str, 1))
