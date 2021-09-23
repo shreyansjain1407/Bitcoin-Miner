@@ -25,4 +25,5 @@ let clientSystem = System.create "client" configuration
 
 let serveRef = select clientSystem "akka.tcp://Server@localhost:9002/user/server"
 serveRef <! Message(10)
+//printfn "Please enter something this is line one"
 Console.ReadLine()
