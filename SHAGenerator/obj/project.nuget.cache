@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9DoJX3+h2uduWJxtfUcsowLyyHbw4pYbl7Vup2hQApXRbmYxlhPwgyKt4MBvt89hMwrqIYT8qRGIgVXtaA3Jdg==",
+  "dgSpecHash": "GzOWkFxs/fYtapXU//JDBdQ+l4mM9xYceHjcrQFRx3HWr1oEz7Ky1mM9eE7BzsUOS5xqCKbcmN4ISx3/eKJWJQ==",
   "success": true,
   "projectFilePath": "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj",
   "expectedPackageFiles": [
@@ -116,9 +116,6 @@
     "C:\\Users\\shrey\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\shrey\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\shrey\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\shrey\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.9\\microsoft.netcore.app.host.win-x64.5.0.9.nupkg.sha512"
   ],
   "logs": []

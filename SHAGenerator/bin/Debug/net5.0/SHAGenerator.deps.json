@@ -9,6 +9,7 @@
       "SHAGenerator/1.0.0": {
         "dependencies": {
           "Akka": "1.4.25",
+          "Akka.FSharp": "1.4.25",
           "Akka.Remote": "1.4.25",
           "FSharp.Core": "6.0.0"
         },
@@ -25,6 +26,20 @@
         },
         "runtime": {
           "lib/netstandard2.0/Akka.dll": {
+            "assemblyVersion": "1.4.25.0",
+            "fileVersion": "1.4.25.0"
+          }
+        }
+      },
+      "Akka.FSharp/1.4.25": {
+        "dependencies": {
+          "Akka": "1.4.25",
+          "FSharp.Core": "6.0.0",
+          "FSharp.Quotations.Evaluator": "2.1.0",
+          "FsPickler": "5.3.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Akka.FSharp.dll": {
             "assemblyVersion": "1.4.25.0",
             "fileVersion": "1.4.25.0"
           }
@@ -172,6 +187,29 @@
           },
           "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll": {
             "locale": "zh-Hant"
+          }
+        }
+      },
+      "FSharp.Quotations.Evaluator/2.1.0": {
+        "dependencies": {
+          "FSharp.Core": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FSharp.Quotations.Evaluator.dll": {
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.0.0"
+          }
+        }
+      },
+      "FsPickler/5.3.2": {
+        "dependencies": {
+          "FSharp.Core": "6.0.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FsPickler.dll": {
+            "assemblyVersion": "5.3.2.0",
+            "fileVersion": "5.3.2.0"
           }
         }
       },
@@ -1163,6 +1201,13 @@
       "path": "akka/1.4.25",
       "hashPath": "akka.1.4.25.nupkg.sha512"
     },
+    "Akka.FSharp/1.4.25": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SggTmYJnGWTSHPAVROALUfXMbx7jWrL+IsVcfRjE4FnpLUroe6xLvV58dTjUc0pad6vrTar5OJhPlH0HSemn0A==",
+      "path": "akka.fsharp/1.4.25",
+      "hashPath": "akka.fsharp.1.4.25.nupkg.sha512"
+    },
     "Akka.Remote/1.4.25": {
       "type": "package",
       "serviceable": true,
@@ -1211,6 +1256,20 @@
       "sha512": "sha512-fbv1UwJ2LXVcFCt+GGDPu0sIYA5C6gdDvAupDj3iLQF3clRkua/6J33f+FiGQa8P1tEa+zmz3wrjoTnXZ1UiYg==",
       "path": "fsharp.core/6.0.0",
       "hashPath": "fsharp.core.6.0.0.nupkg.sha512"
+    },
+    "FSharp.Quotations.Evaluator/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UwmbcIw78pNI4h29H6Vk+45Xky7yqzpxOkHIciW/0VhCN95ANVaopD2wajn88hjabgelm7QmPrC41CKFDhHKIA==",
+      "path": "fsharp.quotations.evaluator/2.1.0",
+      "hashPath": "fsharp.quotations.evaluator.2.1.0.nupkg.sha512"
+    },
+    "FsPickler/5.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LFtxXpQNor8az1ez3rN9oz2cqf/06i9yTrPyJ9R83qLEpFAU7Of0WL2hoSXzLHer4lh+6mO1NV4VQFiBzNRtjw==",
+      "path": "fspickler/5.3.2",
+      "hashPath": "fspickler.5.3.2.nupkg.sha512"
     },
     "Google.Protobuf/3.17.3": {
       "type": "package",
