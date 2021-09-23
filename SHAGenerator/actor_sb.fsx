@@ -18,8 +18,8 @@ type MinerMessage = MineJob of int * int
 type BossMessage = BossJob of bool * string * string
 
 //Reading Command Line Arguments
-// let scriptArg = fsi.CommandLineArgs
-let numLead = 2 //scriptArg.[1] |> int
+let scriptArg = fsi.CommandLineArgs
+let numLead = scriptArg.[1] |> int
 // printf "Arg: %s\n" scriptArg.[1]
 
 //------Functions to get the hash as a String------//

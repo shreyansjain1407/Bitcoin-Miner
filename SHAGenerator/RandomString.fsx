@@ -25,17 +25,21 @@ let iniString (inp: int) =
     elif inp = 4 then "0000"
     else ""
     
-let (|Prefix|_|) (p:string) (s:string) =
-    if s.StartsWith(p) then
-        Some(s.Substring(p.Length))
-    else
-        None
+//let (|Prefix|_|) (p:string) (s:string) =
+//    if s.StartsWith(p) then
+//        Some(s.Substring(p.Length))
+//    else
+//        None
 
-let leadCheck (str: string, numZero: int) bool = 
+let leadCheck (str: string, numZero: int) = 
     let check = iniString numZero
-    match str with
-    | Prefix check str -> true
-    | _ -> false
+    if str.StartsWith(check) then
+        true
+    else
+        false
+//    match str with
+//    | Prefix check str -> true
+//    | _ -> false
 
 
 // let leadCheck(str : string, numZero : int) : bool =

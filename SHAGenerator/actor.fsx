@@ -17,6 +17,7 @@ type BossMessage = BossJob of bool * string * string
 let scriptArg = fsi.CommandLineArgs
 let numLead = scriptArg.[1] |> int
 // printf "Arg: %s\n" scriptArg.[1]
+//printf "Arg: %s\n" scriptArg.[1]
 
 let Miner (mailbox : Actor <_>) =
     let rec loop() = actor {
@@ -53,6 +54,8 @@ let Boss (mailbox : Actor <_>) =
         if (found) then
             printf "Found Boss: %s : %s\n" input hash 
             mailbox.Context.System.Terminate() |> ignore
+        for i in minerArray do
+               i <! MineJob(numLead,rand.Next(100))
         return! loop()
     } loop()
 
