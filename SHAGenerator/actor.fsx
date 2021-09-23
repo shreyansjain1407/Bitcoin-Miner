@@ -16,22 +16,21 @@ type BossMessage = BossJob of bool * string * string
 
 let scriptArg = fsi.CommandLineArgs
 let numLead = scriptArg.[1] |> int
-// printf "Arg: %s\n" scriptArg.[1]
 //printf "Arg: %s\n" scriptArg.[1]
 
 let Miner (mailbox : Actor <_>) =
     let rec loop() = actor {
         let! MineJob(numZero, strLen) = mailbox.Receive()
         let boss = mailbox.Sender()
-        let e = inputStr strLen
+        let inputStr = inputStr strLen
         //printf "%s  " e
-        let d = stringToHash e
+        let hash = stringToHash inputStr
         //printf "%s\n" d
-        let found = leadCheck (d, numZero)
+        let found = leadCheck (hash, numZero)
         if(found) then 
             //printf "Found Miner: %s : %s\n" e d
-            boss <! BossJob(found, e, d)
-        boss <! BossJob(found, e, d)
+            boss <! BossJob(found, inputStr, hash)
+        //boss <! BossJob(found, e, d)
         return! loop()
     }
     loop()
