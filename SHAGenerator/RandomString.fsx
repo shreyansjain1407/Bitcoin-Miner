@@ -2,6 +2,8 @@
 
 let str = "adobra;kjsdfk11"
 
+
+
 let randomStr (len : int) : string =
     let rand = new Random() 
     let ch = Array.concat [| [|'a' .. 'z'|];[|'A' .. 'Z'|];[|'0' .. '9'|] |]
@@ -16,12 +18,32 @@ let getLead(str : string, numZero : int) : string =
     let lead = str.[0..numZero]
     lead
 
-let leadCheck(str : string, numZero : int) : bool =
-    let zeroArray = [| for i in 1 .. numZero -> 0 |]
-    let leadZero = System.String.Join("", zeroArray)
-    let leadStr = str.[0..(numZero-1)]
-    leadStr.Equals(leadZero)
+let iniString (inp: int) = 
+    if inp = 1 then "0"
+    elif inp = 2 then "00"
+    elif inp = 3 then "000"
+    elif inp = 4 then "0000"
+    else ""
+    
+let (|Prefix|_|) (p:string) (s:string) =
+    if s.StartsWith(p) then
+        Some(s.Substring(p.Length))
+    else
+        None
 
+let leadCheck (str: string, numZero: int) bool = 
+    let check = iniString numZero
+    match str with
+    | Prefix check str -> true
+    | _ -> false
+
+
+// let leadCheck(str : string, numZero : int) : bool =
+//     let str = 
+//     let zeroArray = [| for i in 1 .. numZero -> 0 |]
+//     let leadZero = System.String.Join("", zeroArray)
+//     let leadStr = str.[0..(numZero-1)]
+//     leadStr.Equals(leadZero)
 
 //let _str = "10d444d"
 //printf "%b" (leadCheck (_str, 1))

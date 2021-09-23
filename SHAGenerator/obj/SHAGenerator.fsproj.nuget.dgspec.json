@@ -1,27 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj": {}
+    "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj": {}
   },
   "projects": {
-    "D:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj": {
+    "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj",
+        "projectUniqueName": "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj",
         "projectName": "SHAGenerator",
-        "projectPath": "D:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj",
+        "projectPath": "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj",
         "packagesPath": "C:\\Users\\shrey\\.nuget\\packages\\",
-        "outputPath": "D:\\Sem 4\\DOS-Projects\\SHAGenerator\\obj\\",
+        "outputPath": "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\shrey\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\shrey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Users\\shrey\\AppData\\Roaming\\NuGet\\Akka.FSharp": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -47,7 +49,7 @@
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[5.0.0, )",
+              "version": "[6.0.0-beta.*, )",
               "generatePathProperty": true
             }
           },
@@ -61,12 +63,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.9, 5.0.9]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.1.21463.6\\RuntimeIdentifierGraph.json"
         }
       }
     }
