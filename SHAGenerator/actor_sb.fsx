@@ -22,6 +22,21 @@ let scriptArg = fsi.CommandLineArgs
 let numLead = scriptArg.[1] |> int
 // printf "Arg: %s\n" scriptArg.[1]
 
+let iniString (inp: int) = 
+    if inp = 1 then "0"
+    elif inp = 2 then "00"
+    elif inp = 3 then "000"
+    elif inp = 4 then "0000"
+    else ""
+
+let check = iniString numZero
+
+let leadCheck (str: string, numZero: int) = 
+    if str.StartsWith(check) then
+        true
+    else
+        false
+        
 //------Functions to get the hash as a String------//
 
 let byteToHex : byte -> string =
