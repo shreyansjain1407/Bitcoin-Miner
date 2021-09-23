@@ -11,7 +11,22 @@ let deployRemotely address = Deploy(RemoteScope (Address.Parse address))
 let spawnRemote systemOrContext remoteSystemAddress actorName expr =
     spawne systemOrContext actorName expr [SpawnOption.Deploy (deployRemotely remoteSystemAddress)]
 
+let config = 
+    Configuration.parse
+        @"akka {
+            actor {
+                provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""
+            }
+            remote {
+                helios.tcp {
+                    port = 9002
+                    hostname = localhost
+                }
+            }
+        }"
+
 let system = System.create "local-system" config
+
 let aref =
     spawnRemote system "akka.tcp://remote-system@localhost:9001/" "hello"
        // actorOf wraps custom handling function with message receiver logic
