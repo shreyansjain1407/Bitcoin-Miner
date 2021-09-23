@@ -18,12 +18,7 @@ let getLead(str : string, numZero : int) : string =
     let lead = str.[0..numZero]
     lead
 
-let iniString (inp: int) = 
-    if inp = 1 then "0"
-    elif inp = 2 then "00"
-    elif inp = 3 then "000"
-    elif inp = 4 then "0000"
-    else ""
+
     
 //let (|Prefix|_|) (p:string) (s:string) =
 //    if s.StartsWith(p) then
@@ -31,12 +26,7 @@ let iniString (inp: int) =
 //    else
 //        None
 
-let leadCheck (str: string, numZero: int) = 
-    let check = iniString numZero
-    if str.StartsWith(check) then
-        true
-    else
-        false
+
 //    match str with
 //    | Prefix check str -> true
 //    | _ -> false
