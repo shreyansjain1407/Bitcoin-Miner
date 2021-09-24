@@ -1,5 +1,6 @@
 #time "on"
 #r "nuget: Akka.FSharp" //load with nuget
+#r "nuget: Akka.Remote"
 #load "sha256.fsx"
 #load "RandomString.fsx"
 open System
@@ -22,20 +23,20 @@ let scriptArg = fsi.CommandLineArgs
 let numLead = scriptArg.[1] |> int
 // printf "Arg: %s\n" scriptArg.[1]
 
-let iniString (inp: int) = 
-    if inp = 1 then "0"
-    elif inp = 2 then "00"
-    elif inp = 3 then "000"
-    elif inp = 4 then "0000"
-    else ""
-
-let check = iniString numLead
-
-let leadCheck (str: string, numZero: int) = 
-    if str.StartsWith(check) then
-        true
-    else
-        false
+//let iniString (inp: int) = 
+//    if inp = 1 then "0"
+//    elif inp = 2 then "00"
+//    elif inp = 3 then "000"
+//    elif inp = 4 then "0000"
+//    else ""
+//
+//let check = iniString numLead
+//
+//let leadCheck (str: string, numZero: int) = 
+//    if str.StartsWith(check) then
+//        true
+//    else
+//        false
         
 //------Functions to get the hash as a String------//
 
@@ -52,7 +53,7 @@ let stringToHash (_str : string) : string =
 
 let sb = System.Text.StringBuilder("shreyansjain")
 
-let Miner (mailbox : Actor <_>) =
+let Miner (mailbox : Actor<_>) =
     let rec loop() = actor {
         let! MineJob(numZero, strLen) = mailbox.Receive()
         let boss = mailbox.Sender()
@@ -73,7 +74,7 @@ let Miner (mailbox : Actor <_>) =
 
 //processorRef <! MineJob(1,5)
 
-let Boss (mailbox : Actor <_>) = 
+let Boss (mailbox : Actor<_>) = 
     let numProcess = System.Environment.ProcessorCount |> int
     let numMiners = numProcess*250
     let minerArray = Array.create numMiners (spawn system "miner" Miner)

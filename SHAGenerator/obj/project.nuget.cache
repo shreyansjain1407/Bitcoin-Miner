@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GzOWkFxs/fYtapXU//JDBdQ+l4mM9xYceHjcrQFRx3HWr1oEz7Ky1mM9eE7BzsUOS5xqCKbcmN4ISx3/eKJWJQ==",
+  "dgSpecHash": "heRH8X7WhcviZIKhkCFYxojLyaaGzP14L6zOqrHqZrUwPEtBOaL08VoMDceKrFrCkvJdhZ1wTeW8Vo+7DApFIA==",
   "success": true,
   "projectFilePath": "F:\\Sem 4\\DOS-Projects\\SHAGenerator\\SHAGenerator.fsproj",
   "expectedPackageFiles": [
@@ -12,7 +12,7 @@
     "C:\\Users\\shrey\\.nuget\\packages\\dotnetty.common\\0.6.0\\dotnetty.common.0.6.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\dotnetty.handlers\\0.6.0\\dotnetty.handlers.0.6.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\dotnetty.transport\\0.6.0\\dotnetty.transport.0.6.0.nupkg.sha512",
-    "C:\\Users\\shrey\\.nuget\\packages\\fsharp.core\\6.0.0\\fsharp.core.6.0.0.nupkg.sha512",
+    "C:\\Users\\shrey\\.nuget\\packages\\fsharp.core\\5.0.0\\fsharp.core.5.0.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\fsharp.quotations.evaluator\\2.1.0\\fsharp.quotations.evaluator.2.1.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\fspickler\\5.3.2\\fspickler.5.3.2.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\google.protobuf\\3.17.3\\google.protobuf.3.17.3.nupkg.sha512",
@@ -115,8 +115,7 @@
     "C:\\Users\\shrey\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
     "C:\\Users\\shrey\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\shrey\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\shrey\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.9\\microsoft.netcore.app.host.win-x64.5.0.9.nupkg.sha512"
+    "C:\\Users\\shrey\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

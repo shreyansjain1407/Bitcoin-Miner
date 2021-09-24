@@ -50,3 +50,4 @@ F:\Sem 4\DOS-Projects\SHAGenerator\obj\Debug\net5.0\SHAGenerator.genruntimeconfi
 F:\Sem 4\DOS-Projects\SHAGenerator\bin\Debug\net5.0\Akka.FSharp.dll
 F:\Sem 4\DOS-Projects\SHAGenerator\bin\Debug\net5.0\FSharp.Quotations.Evaluator.dll
 F:\Sem 4\DOS-Projects\SHAGenerator\bin\Debug\net5.0\FsPickler.dll
+F:\Sem 4\DOS-Projects\SHAGenerator\obj\Debug\net5.0\SHAGenerator.fsproj.CopyComplete
