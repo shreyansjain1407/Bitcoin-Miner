@@ -18,7 +18,7 @@ let scriptArg = fsi.CommandLineArgs
 let numLead = scriptArg.[1] |> int
 //printf "Arg: %s\n" scriptArg.[1]
 
-let Miner (mailbox : Actor <_>) =
+let Miner (mailbox : Actor<_>) =
     let rec loop() = actor {
         let! MineJob(numZero, strLen) = mailbox.Receive()
         let boss = mailbox.Sender()
@@ -39,7 +39,7 @@ let Miner (mailbox : Actor <_>) =
 
 //processorRef <! MineJob(1,5)
 
-let Boss (mailbox : Actor <_>) = 
+let Boss (mailbox : Actor<_>) = 
     let numProcess = System.Environment.ProcessorCount |> int
     let numMiners = numProcess*250
     let minerArray = Array.create numMiners (spawn system "miner" Miner)
