@@ -2,17 +2,36 @@
 #r "nuget: Akka.FSharp" //load with nuget
 #load "sha256.fsx"
 #load "RandomString.fsx"
+#r "nuget: Akka.TestKit"
+#r "nuget: Akka.Remote"
+
 open System
 open Akka.Actor
 open Akka.FSharp
 open Akka.Configuration
 open Sha256
 open RandomString
-open System
+open System.Threading
+open Akka.TestKit
+
+let configuration = 
+    ConfigurationFactory.ParseString(
+        @"akka {
+            log-config-on-start : on
+            stdout-loglevel : DEBUG
+            loglevel : ERROR
+            actor {
+                provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""
+            }
+            remote.helios.tcp {
+                transport-protocol = tcp
+                port = 8777
+                hostname = localhost
+            }
+        }")
 
 
-
-let system = System.create "system" <| Configuration.load()
+let system = ActorSystem.Create( "system" , configuration)
 
 //type MinerMessage = MineJob of int * int
 //type BossMessage = BossJob of bool *  string * string
@@ -31,10 +50,10 @@ let Miner (mailbox : Actor<_>)  =
     let rec loop() = actor {
         //let! MineJob(numZero, strLen) = mailbox.Receive()
         let! (msg : MinerMessage) = mailbox.Receive()
-        let boss = mailbox.Sender()
+        let boss = system.ActorSelection("akka.tcp://system@localhost:8777/user/boss")
         match msg with
             | MineJob(numZero, strLen) ->
-                let boss = mailbox.Sender()
+                let boss = system.ActorSelection("akka.tcp://system@localhost:8777/user/boss")
                 let inputStr = inputStr strLen
                 //printf "%s  " inputStr
                 let hash = stringToHash inputStr

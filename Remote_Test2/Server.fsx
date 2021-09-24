@@ -2,22 +2,17 @@
 #r "nuget: Akkling" 
 #r "nuget: Akka.Remote"
 #r "nuget: Newtonsoft.Json"
-open Message
+// open Message
 open System
 open Akkling
+
+type Message = Message of int
 
 let configuration = 
     Configuration.parse
         @"akka {
             actor {
                 provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""
-                debug : {
-                    receive : on
-                    autoreceive : on
-                    lifecycle : on
-                    event-stream : on
-                    unhandled : on
-                }
             }
             remote {
                 helios.tcp {
@@ -34,5 +29,7 @@ let rec server = function
     printfn "Got a number %d" num
     become server
 
+
+printfn "Can you see this debug text?"
 let serveRef = spawn serversystem "server" <| props(actorOf server)
 Console.ReadLine() |> ignore
