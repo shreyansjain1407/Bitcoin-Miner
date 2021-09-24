@@ -1,9 +1,5 @@
 open System
 
-let str = "adobra;kjsdfk11"
-
-
-
 let randomStr (len : int) : string =
     let rand = new Random() 
     let ch = Array.concat [| [|'a' .. 'z'|];[|'A' .. 'Z'|];[|'0' .. '9'|] |]
