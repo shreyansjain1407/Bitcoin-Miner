@@ -12,7 +12,7 @@ the boss indicating if a coin was found. We determined that this would be the be
 simple and handled by F# libraries rather quickly. This would be much more efficient than spawning many different actors responsible for 
 each part of that workload and then having them communicate with each other constantly.
 
-The program was able to successfully mine dozens of coins with an input of 4 leading zeroes. The running time for was measured with 
+The program was able to successfully mine dozens of coins with an input of 4 leading zeroes. The running time was measured with 
 "#time "on"" and the result of running it was: 
 	
 	Real: 00:00:15.728, CPU: 00:01:30.359 -> Ratio: 5.75
