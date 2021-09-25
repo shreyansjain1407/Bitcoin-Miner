@@ -20,7 +20,7 @@ This was ran on a machine with 6 cores.
 
 The coin with the most leading zeros we found was 7:
 
-	Real: 00:08:32.590, CPU: 00:44:41.125
+	Real: 00:08:32.590, CPU: 00:44:41.125 -> Ratio: 5.23
 
 We were not able to get a successful server running in time, so the largest number of working machines we used was 1.
 
