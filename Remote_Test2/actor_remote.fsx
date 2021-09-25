@@ -89,7 +89,7 @@ let remoteBoss =
             |> List.map(fun id -> system.ActorOf(Props(typedefof<childMiner>)))
 
         let childCount = [|for cm in childMinerSet -> cm|]
-        let minerSystem = system.ActorOf(Props.Empty.WithRouter(RoundRobinGroup(childCount)))
+        let minerSystem = system.ActorOf(Props.Empty.WithRouter(Akka.Routing.RoundRobinGroup(childCount)))
         
         let rand = new Random()
         let rec loop() = actor {

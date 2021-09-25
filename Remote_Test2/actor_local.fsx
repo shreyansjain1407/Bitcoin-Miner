@@ -40,9 +40,10 @@ type MinerMessage =
     | Continue
     | Stop
 type BossMessage = 
-    | MineJobBoss of numZero : int * strLen : int
     | Mine
     | Found
+type RemoteBossMessage = 
+    | MineJobBoss of numZero : int * strLen : int
 
 let scriptArg = fsi.CommandLineArgs
 let numLead = scriptArg.[1] |> int

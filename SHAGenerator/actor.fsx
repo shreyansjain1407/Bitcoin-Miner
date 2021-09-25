@@ -27,7 +27,7 @@ type BossMessage =
 let scriptArg = fsi.CommandLineArgs
 let numLead = scriptArg.[1] |> int
 
-let Miner (mailbox : Actor <_>)  =
+let Miner (mailbox : Actor<_>)  =
     let rec loop() = actor {
         //let! MineJob(numZero, strLen) = mailbox.Receive()
         let! (msg : MinerMessage) = mailbox.Receive()
@@ -60,7 +60,7 @@ let Miner (mailbox : Actor <_>)  =
     } loop()
     
 
-let Boss (mailbox : Actor <_>) = 
+let Boss (mailbox : Actor<_>) = 
     let numProcess = System.Environment.ProcessorCount |> int
     let numMiners = 125
     //let minerArray = Array.create numMiners (spawn mailbox.Context  "miner" Miner)
