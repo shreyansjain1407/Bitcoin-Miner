@@ -18,7 +18,9 @@ The program was able to successfully mine dozens of coins with an input of 4 lea
 	Real: 00:00:15.728, CPU: 00:01:30.359 -> Ratio: 5.75
 This was ran on a machine with 6 cores.
 
-The coin with the most leading zeros we found was:
+The coin with the most leading zeros we found was 7:
+
+	Real: 00:08:32.590, CPU: 00:44:41.125
 
 We were not able to get a successful server running in time, so the largest number of working machines we used was 1.
 
