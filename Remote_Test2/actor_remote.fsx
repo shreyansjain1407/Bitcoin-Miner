@@ -1,4 +1,3 @@
-open System.Threading
 #time "on"
 #r "nuget: Akka"
 #r "nuget: Akka.FSharp"
@@ -7,7 +6,8 @@ open System.Threading
 #load "sha256.fsx"
 #load "RandomStringRemote.fsx"
 
-
+open System.Threading
+open Akka.Routing
 open System
 open Akka.Actor
 open Akka.Configuration
@@ -33,6 +33,7 @@ let configuration =
             }
             remote {
                 helios.tcp {
+                    transport-protocol = tcp
                     port = 8778
                     hostname = localhost
                 }
@@ -46,84 +47,77 @@ type MinerMessage =
     | Continue
     | Stop
 type BossMessage = 
-    | MineJobBoss of numZero : int * strLen : int
     | Mine
     | Found
+type RemoteBossMessage = 
+    | MineJobBoss of numZero : int * strLen : int
 
 // let scriptArg = fsi.CommandLineArgs
 let mutable numLead = 0
 
-let Miner (mailbox : Actor<_>)  =
-    let rec loop() = actor {
-        //let! MineJob(numZero, strLen) = mailbox.Receive()
-        let! (msg : MinerMessage) = mailbox.Receive()
-        let boss = system.ActorSelection("akka.tcp://system@localhost:8777/user/boss")
-        match msg with
-            | MineJob(numZero, strLen) ->
-                let boss = system.ActorSelection("akka.tcp://system@localhost:8777/user/boss")
-                let inputStr = RandomStringRemote.inputStr strLen
-                //printf "%s  " inputStr
-                let hash = Sha256.stringToHash inputStr
-                //printf "%s\n" hash
-                let found = RandomStringRemote.leadCheck (hash, numZero)
-                if(found) then 
-                    printf "[[ Found Miner: ]] %s : %s\n" inputStr hash
-                    boss <! Found
-                else
-                    boss <! Mine
-             | Continue ->
-                 boss <! Mine
-             | Stop ->
-                boss <! Found
-             | _ -> ()
-            //boss <! found
-            //boss <! BossJob(found, inputStr, hash)
-            //boss <! BossJob(found, e, d)
-            //mailbox.Self <! MineJob(numLead,rand.Next(100))
-            //mailbox.Self <! Continue
-            //select "user/Boss" mailbox.Context.System <! Mine
-        return! loop()
-    } loop()
+type childMiner() = 
+    inherit Actor()
+    override x.OnReceive message = 
+        let mainBoss = system.ActorSelection( "akka.tcp://system@localhost:8777/user/boss")
+        
+        let x : MinerMessage = downcast message
+        match x with 
+        | MineJob(numZero, strLen) ->
+            // let mainBoss = system.ActorSelection("akka.tcp://system@localhost:8777/user/boss")
+            
+            let inputStr = RandomStringRemote.inputStr strLen
+            //printf "%s  " inputStr
+            let hash = Sha256.stringToHash inputStr
+            //printf "%s\n" hash
+            let found = RandomStringRemote.leadCheck (hash, numZero)
+            if(found) then 
+                printf "[[ Found Miner: ]] %s : %s\n" inputStr hash
+                mainBoss <! Found
+        | Stop ->
+            mainBoss <! Found
+        | _ -> ()
     
 
+let remoteBoss = 
+    spawn system "boss"
+    <| fun mailbox ->
+        let numProcess = System.Environment.ProcessorCount |> int
+        let numMiners = numProcess*125
+        //let minerArray = Array.create numMiners (spawn mailbox.Context  "miner" Miner)
+        let childMinerSet =
+            [1 .. numMiners]
+            |> List.map(fun id -> system.ActorOf(Props(typedefof<childMiner>)))
 
-let Boss (mailbox : Actor<_>) = 
-    let numProcess = System.Environment.ProcessorCount |> int
-    let numMiners = 125
-    //let minerArray = Array.create numMiners (spawn mailbox.Context  "miner" Miner)
-   
-    let rand = new Random()
-    //for i in minerArray do
-               //i <! MineJob(numLead,rand.Next(100))
-    let rec loop() = actor {
-        //let! BossJob(found, input, hash) = mailbox.Receive()
-        //if (found) then
-            //printf "[[ Found Boss ]]: %s : %s\n" input hash 
-        //for i in minerArray do
-            //mailbox.Context.Stop(i)
-            //mailbox.Context.System.Terminate() |> ignore
-        let! (msg : BossMessage) = mailbox.Receive()
-        match msg with
-            | MineJobBoss(numZero, strLen) ->
-                numLead <- numZero
-                let minerArray = Array.create numMiners (spawn mailbox.Context ("miner" + RandomStringRemote.randomStr (rand.Next(1000))) Miner)
-                for i in minerArray do
-                    i <! MineJob(numLead,rand.Next(100))
-                ()
-            | Mine -> 
-                let minerArray = Array.create numMiners (spawn mailbox.Context ("miner" + RandomStringRemote.randomStr (rand.Next(1000))) Miner)
-                for i in minerArray do
-                    i <! MineJob(numLead,rand.Next(100))
-                ()
-            | Found -> 
-                mailbox.Context.System.Terminate() |> ignore
-                ()
-            | _ -> ()
+        let childCount = [|for cm in childMinerSet -> cm|]
+        let minerSystem = system.ActorOf(Props.Empty.WithRouter(RoundRobinGroup(childCount)))
+        
+        let rand = new Random()
+        let rec loop() = actor {
+            
+            let! (msg : obj) = mailbox.Receive()
+            let (numZero, strLen) : Tuple<int32 ,int32> = downcast msg
+            
+            minerSystem <! MineJob(numLead,strLen)
 
-        return! loop()
-    } loop()
-
-let bossRef = spawn system "boss" Boss
-bossRef <! Mine
+            // match msg with
+            //     | MineJobBoss(numZero, strLen) ->
+            //         numLead <- numZero
+            //         let minerArray = Array.create numMiners (spawn mailbox.Context ("miner" + RandomStringRemote.randomStr (rand.Next(1000))) childMiner)
+            //         for i in minerArray do
+            //             i <! MineJob(numLead,rand.Next(100))
+            //         ()
+            //     | Mine -> 
+            //         let minerArray = Array.create numMiners (spawn mailbox.Context ("miner" + RandomStringRemote.randomStr (rand.Next(1000))) childMiner)
+            //         for i in minerArray do
+            //             i <! MineJob(numLead,rand.Next(100))
+            //         ()
+            //     | Found -> 
+            //     mailbox.Context.System.Terminate() |> ignore
+            //     ()
+            //     | _ -> ()
+            return! loop()
+        } 
+        printfn "Remote Mining Boss has been initialized"
+        loop()
 
 system.WhenTerminated.Wait()

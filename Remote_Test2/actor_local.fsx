@@ -40,6 +40,7 @@ type MinerMessage =
     | Continue
     | Stop
 type BossMessage = 
+    | MineJobBoss of numZero : int * strLen : int
     | Mine
     | Found
 
@@ -82,6 +83,7 @@ let Miner (mailbox : Actor<_>)  =
 let Boss (mailbox : Actor<_>) = 
     let numProcess = System.Environment.ProcessorCount |> int
     let numMiners = 125
+    let remoteBoss = system.ActorSelection("akka.tcp://RemoteSystem@localhost:8778/user/remoteBoss")
     //let minerArray = Array.create numMiners (spawn mailbox.Context  "miner" Miner)
    
     let rand = new Random()
@@ -99,7 +101,13 @@ let Boss (mailbox : Actor<_>) =
             | Mine -> 
                 let minerArray = Array.create numMiners (spawn mailbox.Context ("miner" + randomStr (rand.Next(1000))) Miner)
                 for i in minerArray do
-                    i <! MineJob(numLead,rand.Next(100))
+                    let mutable x = true
+                    if x then
+                        i <! MineJob(numLead,rand.Next(100))
+                        x <- false
+                    else
+                        remoteBoss <! MineJobBoss(numLead,rand.Next(100))
+                        x <- true
                 ()
             | Found -> 
                 mailbox.Context.System.Terminate() |> ignore
